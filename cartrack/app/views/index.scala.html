@@ -1,0 +1,68 @@
+@(message: String)
+
+@css = {
+	#mapcanvas img {
+  		max-width: none;
+	}
+}
+
+@js = {
+	function initialize() {
+        var mapOptions = {
+          center: new google.maps.LatLng(-34.397, 150.644),
+          zoom: 8,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map_canvas"),
+            mapOptions);
+            
+      }
+	$(document).ready(
+		function(){
+			//initialize();
+			$(window).resize(function () {
+  			var h = $(window).height(),
+        	offsetTop = 60; // Calculate the top offset
+    		$('#map_canvas').css('height', (h - offsetTop));
+			}).resize();
+		}
+	)
+
+}
+
+
+@content = {
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span9">
+				<br/>
+				<div id="map_canvas" ></div>
+				
+			</div>
+			
+			<div class="span3">
+				<ul class="nav nav-tabs">
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">创建
+							<b class="caret"></b>
+						</a>
+						<ul class = "dropdown-menu">
+							<li><a href="#new_car" data-toggle="tab">创建新对象</a></li>
+							<li><a href="#new_record" data-toggle="tab">创建新记录</a></li>
+						</ul>
+					</li>
+					<li><a href="#search" data-toggle="tab">查询</a></li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="new_car">@newship()</div>
+					<div class="tab-pane" id="new_record">new_record</div>
+					<div class="tab-pane" id="search">search</div>
+				
+				</div>
+			
+			</div>
+		</div>
+	</div>    
+
+}
+@main("Welcome to Play 2.0")(css)(js)(content)
