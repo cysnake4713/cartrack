@@ -1,0 +1,11 @@
+error_register_accountname_null=用户名不得为空
+error_register_accountname_not_email=用户名必须是电子邮件形式
+error_register_accountname_is_exist=该用户名已经存在
+
+error_register_password_null=密码不能为空
+error_register_password_too_short=密码必须大于9位
+error_register_password_too_long=密码必须小于17位
+error_register_password_bad_char=密码必须由且只由数字和字母组成
+
+
+error_login_account_is_not_match=用户名或者密码不正确

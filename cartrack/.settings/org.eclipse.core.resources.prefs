@@ -1,5 +1,7 @@
-#Mon Jul 30 04:27:53 VET 2012
+#Mon Jul 30 22:32:27 VET 2012
 eclipse.preferences.version=1
 encoding//app/views/index.scala.html=UTF-8
+encoding//app/views/navbar.scala.html=UTF-8
+encoding//app/views/newrecord.scala.html=UTF-8
 encoding//app/views/newship.scala.html=UTF-8
 encoding/<project>=UTF-8

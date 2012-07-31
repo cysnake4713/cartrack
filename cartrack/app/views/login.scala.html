@@ -1,0 +1,44 @@
+@(errorMessage:String)
+@content = {
+	<div class="container">
+		<div class="span6 offset3">
+		
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<form action="/user/login" class="form-horizontal" method="post">
+				<fieldset>
+					<legend>登录</legend>
+					@if(!"".equals(errorMessage) ){
+						<div class="alert alert-error">
+							@errorMessage
+						</div>
+					}
+					<div class="control-group">
+						<label class="control-label">用户名</label>
+						<div class="controls">
+							<input name="accountName" type="text" class="input-medium" />
+							<p class="help-block">输入本系统用户名,电子邮件形式</p>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">密码</label>
+						<div class="controls">
+							<input name="password" type="password" class="input-medium" />
+							<p class="help-block">必须是数字和字母组合</p>
+						</div>
+					</div>
+					<div class="form-actions">
+						<button type="submit" class="btn btn-primary">登录</button>
+						<button class="btn" onclick="location.href='/register';">注册</button>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+} 
+@main("login")(content)

@@ -1,0 +1,30 @@
+@import play.mvc.Controller.session
+
+@if("".equals(session("userName"))){
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="span4 offset1">
+				<a class="brand" href="#">请登录系统</a>
+			</div>
+			<div class="nav-collapse pull-right">
+				<ul class="nav">
+					<li><a href="/register">注册</a>
+					<li><a href="/login">登录</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+} else {
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="span4 offset1">
+				<a class="brand" href="#">你好,@session("userName")</a>
+			</div>
+			<div class="nav-collapse pull-right">
+				<ul class="nav">
+					<li><a href="/user/logout">退出</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+}
