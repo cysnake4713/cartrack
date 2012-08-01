@@ -4,6 +4,7 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.node.ObjectNode;
 
 import models.Account;
+import models.Target;
 
 import play.Logger;
 import play.data.Form;
@@ -25,7 +26,7 @@ public class AccountController extends Controller {
 				String md5Password = MD5Util.getMD5String(account.password);
 				account.password = md5Password;
 				account.save();
-				return ok(index.render());
+				return ok(login.render(""));
 			} else {
 				return badRequest(register.render(Messages
 						.get("error_register_accountname_is_exist")));
@@ -46,7 +47,9 @@ public class AccountController extends Controller {
 				// login and set cookie
 				session("userName", account.accountName);
 				session("userId", account.id.toString());
-				return ok(index.render());
+				return ok(newtarget
+						.render(Account.find.byId(Long
+								.valueOf(session("userId"))).targets, ""));
 			} else {
 				// else return password or account name error message
 				return badRequest(login.render(Messages
@@ -60,8 +63,7 @@ public class AccountController extends Controller {
 	}
 
 	public static Result logout() {
-		session("userName", "");
-		session("userId", "");
+		session().clear();
 		return ok(login.render(""));
 
 	}

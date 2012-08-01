@@ -11,6 +11,32 @@ create table account (
   constraint pk_account primary key (id))
 ;
 
+create table point (
+  id                        bigint auto_increment not null,
+  target_id                 bigint,
+  point_record_time         datetime,
+  longitude                 double,
+  latitude                  double,
+  comments                  varchar(255),
+  gas_cost                  integer,
+  scan_document_url         varchar(255),
+  constraint pk_point primary key (id))
+;
+
+create table target (
+  id                        bigint auto_increment not null,
+  target_tag                varchar(255),
+  target_name               varchar(255),
+  comments                  varchar(255),
+  account_id                bigint,
+  constraint uq_target_target_tag unique (target_tag),
+  constraint pk_target primary key (id))
+;
+
+alter table point add constraint fk_point_target_1 foreign key (target_id) references target (id) on delete restrict on update restrict;
+create index ix_point_target_1 on point (target_id);
+alter table target add constraint fk_target_account_2 foreign key (account_id) references account (id) on delete restrict on update restrict;
+create index ix_target_account_2 on target (account_id);
 
 
 
@@ -19,6 +45,10 @@ create table account (
 SET FOREIGN_KEY_CHECKS=0;
 
 drop table account;
+
+drop table point;
+
+drop table target;
 
 SET FOREIGN_KEY_CHECKS=1;
 

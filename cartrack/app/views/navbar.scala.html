@@ -1,24 +1,44 @@
-@import play.mvc.Controller.session
-
-@if("".equals(session("userName"))){
-	<div class="navbar navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="span4 offset1">
-				<a class="brand" href="#">请登录系统</a>
-			</div>
-			<div class="nav-collapse pull-right">
-				<ul class="nav">
-					<li><a href="/register">注册</a>
-					<li><a href="/login">登录</a></li>
-				</ul>
-			</div>
+@import play.mvc.Controller.session 
+@if(session("userName")==null){
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="span4 offset1">
+			<a class="brand" href="#">请登录系统</a>
+		</div>
+		<div class="nav-collapse pull-right">
+			<ul class="nav">
+				<li><a href="/register">注册</a>
+				<li><a href="/login">登录</a></li>
+			</ul>
 		</div>
 	</div>
+</div>
 } else {
-	<div class="navbar navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="span4 offset1">
-				<a class="brand" href="#">你好,@session("userName")</a>
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse"
+				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+				class="icon-bar"></span> <span class="icon-bar"></span>
+			</a> <a class="brand" href="#">你好,@session("userName")</a>
+			<div class="nav-collapse">
+				<ul class="nav">
+					<li class="dropdown">
+						<a class="dropdown-toggle"
+							data-toggle="dropdown" href="#">监视对象 <b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="#listtarget">当前状态</a></li>
+							<li><a href="/newtarget">创建新对象</a></li>
+						</ul>
+					</li>
+					<li class="dropdown"><a  class="dropdown-toggle" data-toggle="dropdown" href="#" >路径<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="#listtarget">查询路径</a></li>
+							<li><a href="/newpoint">添加标点</a></li>
+						</ul>
+					</li>
+				</ul>
 			</div>
 			<div class="nav-collapse pull-right">
 				<ul class="nav">
@@ -27,4 +47,5 @@
 			</div>
 		</div>
 	</div>
+</div>
 }

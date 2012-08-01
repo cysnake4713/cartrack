@@ -1,0 +1,37 @@
+@(targetList:List[Target])
+<div class="row">
+	<div class="span4 page-header">
+		<h1>正在监视的对象</h1>
+	</div>
+</div>
+<div class="row">
+	<div class="span6">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>标示</th>
+					<th>名称</th>
+					<th>备注</th>
+				</tr>
+			</thead>
+			<tbody>
+				@if(targetList.isEmpty()){
+				<tr>
+					<td><strong>没有记录</strong></td>
+				</tr>
+				} else{ @for( target<- targetList){
+				<tr>
+					<td>@target.id</td>
+					<td>@target.targetTag</td>
+					<td>@target.targetName</td>
+					<td>@target.comments</td>
+					<td><button class="btn">追踪</button>
+				</tr>
+				} }
+
+
+			</tbody>
+		</table>
+	</div>
+</div>

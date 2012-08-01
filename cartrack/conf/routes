@@ -6,10 +6,14 @@
 GET		/							controllers.Application.login()
 GET		/register					controllers.Application.register()
 GET		/login						controllers.Application.login()
+GET		/newtarget					controllers.Application.newTarget()
+GET		/newpoint					controllers.Application.newPoint()
 
 #register
 POST	/user/register				controllers.AccountController.register()
 POST	/user/login					controllers.AccountController.login()
+POST	/target/newtarget			controllers.TargetController.newTarget()
+POST	/point/newpoint				controllers.PointController.newPoint()
 GET		/user/logout				controllers.AccountController.logout()
 
 # Map static resources from the /public folder to the /assets URL path

@@ -1,13 +1,19 @@
 package models;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
+import play.data.validation.*;
 
 import play.db.ebean.Model;
 import play.i18n.Messages;
@@ -29,15 +35,54 @@ public class Account extends Model {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_seq")
 	public Long id;
 
-	// @Required
 	@Column(unique = true)
+	@Constraints.Required
 	public String accountName;
 
-	// @Required
+	@Constraints.Required
 	public String password;
+
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OrderBy("id")  
+	public List<Target> targets;
 
 	public static Finder<Long, Account> find = new Finder<Long, Account>(
 			Long.class, Account.class);
+
+	public boolean isNameExist() {
+		Account account = find.where().eq("accountName", accountName)
+				.findUnique();
+		return (account == null ? false : true);
+	}
+
+	public boolean isExist() {
+		Account account = find.where().eq("accountName", accountName)
+				.eq("password", MD5Util.getMD5String(password)).findUnique();
+		if (account != null) {
+			id = account.id;
+		}
+		return (account == null ? false : true);
+	}
+
+	public String getUserTargetName() {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("[");
+		for (Target target : targets) {
+			stringBuilder.append("\"" + target.targetTag + "\",");
+		}
+		stringBuilder
+				.delete(stringBuilder.length() - 1, stringBuilder.length());
+		stringBuilder.append("]");
+
+		return stringBuilder.toString();
+
+	}
+
+	@Override
+	public String toString() {
+		return String.format("id=%d accountName=%s password=%s", id,
+				accountName, password);
+	}
 
 	public String validate() {
 		// account name and password can't be null
@@ -70,26 +115,4 @@ public class Account extends Model {
 		}
 		return null;
 	}
-
-	public boolean isNameExist() {
-		Account account = find.where().eq("accountName", accountName)
-				.findUnique();
-		return (account == null ? false : true);
-	}
-
-	public boolean isExist() {
-		Account account = find.where().eq("accountName", accountName)
-				.eq("password", MD5Util.getMD5String(password)).findUnique();
-		if (account != null) {
-			id = account.id;
-		}
-		return (account == null ? false : true);
-	}
-
-	@Override
-	public String toString() {
-		return String.format("id=%d accountName=%s password=%s", id,
-				accountName, password);
-	}
-
 }

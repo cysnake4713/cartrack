@@ -1,0 +1,74 @@
+@(targetL:List[Target],message: String="")
+@css = { } 
+@js = { } 
+@content = {
+<div class="container">
+	<div class="row">
+		<div class="span8">
+			<br /> <br />
+			<div class="row">
+				<div class="span4 page-header">
+					<h1>正在监视的对象</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span6">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>标示</th>
+								<th>名称</th>
+								<th>备注</th>
+							</tr>
+						</thead>
+						<tbody>
+							@if(targetL.isEmpty()){
+							<tr>
+								<td><strong>没有记录</strong></td>
+							</tr>
+							} else{ @for( target<- targetL){
+							<tr>
+								<td>@target.id</td>
+								<td>@target.targetTag</td>
+								<td>@target.targetName</td>
+								<td>@target.comments</td>
+								<td><button class="btn">追踪</button>
+							</tr>
+							} }
+
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<div class="span4">
+			<br /> <br />
+			<div class="tab-pane active" id="new_car">
+				<div>
+					<form action="/target/newtarget" method="post" class="well">
+						<legend>创建一个新的监视对象</legend>
+						@if(!"".equals(message)){
+						<div class="alert alert-error">@message</div>
+						} <label class="control-label">对象名称</label> <input
+							name="targetName" type="text" class="input-medium" />
+						<p class="help-block">输入对象名称</p>
+						<label>对象标示</label> <input name="targetTag" type="text"
+							class="input-medium" />
+						<p class="help-block">输入对象标示</p>
+						<label>备注</label>
+						<textarea name="comments" class="input-medium" rows="3"></textarea>
+						<div>
+							<button type="submit" class="btn btn-primary">创建</button>
+							<input type="button" class="btn" value="清除" />
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+} @main("index",css,js)(content)
