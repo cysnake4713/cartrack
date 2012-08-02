@@ -1,6 +1,6 @@
 @import play.mvc.Controller.session 
 @if(session("userName")==null){
-<div class="navbar navbar-fixed-top">
+<div class="navbar">
 	<div class="navbar-inner">
 		<div class="span4 offset1">
 			<a class="brand" href="#">请登录系统</a>
@@ -14,7 +14,7 @@
 	</div>
 </div>
 } else {
-<div class="navbar navbar-fixed-top">
+<div class="navbar">
 	<div class="navbar-inner">
 		<div class="container">
 			<a class="btn btn-navbar" data-toggle="collapse"
