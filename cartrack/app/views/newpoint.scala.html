@@ -10,7 +10,7 @@
 					@if(!"".equals(message)){
 						<div class="alert alert-error">@message</div>
 					}
-					<label>对象标示</label> <input  name="target.targetTag" type="text"
+					<label>对象标示</label> <input autocomplete="off"  name="target.targetTag" type="text"
 						class="inline" data-provide="typeahead" data-source="@tagString" data-items="4"/>
 					<p class="help-block">输入对象标示</p>
 					<label>时间</label> <input name="pointRecordTime" id="recordtime"

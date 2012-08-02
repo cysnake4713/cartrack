@@ -13,7 +13,6 @@ public class PointController extends Controller {
 		String userTargetName = Account.find.byId(
 				Long.valueOf(session("userId"))).getUserTargetName();
 		Form<Point> newPoint = form(Point.class).bindFromRequest();
-		System.out.println(newPoint);
 		if (!newPoint.hasErrors()) {
 			Point pointPO = newPoint.get();
 			Target tempTarget = pointPO.target.findByTargetTag();
@@ -24,14 +23,8 @@ public class PointController extends Controller {
 
 			}
 			pointPO.save();
-			Target targetPO = new Target();
-			targetPO.account = Account.find.byId(Long
-					.valueOf(session("userId")));
 			return ok(newpoint.render("创建成功", userTargetName));
 		} else {
-			Target targetPO = new Target();
-			targetPO.account = Account.find.byId(Long
-					.valueOf(session("userId")));
 			return badRequest(newpoint.render(newPoint.errorsAsJson()
 					.toString(), userTargetName));
 		}
