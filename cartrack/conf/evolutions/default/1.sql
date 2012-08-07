@@ -17,9 +17,11 @@ create table point (
   point_record_time         datetime,
   longitude                 double,
   latitude                  double,
-  comments                  varchar(255),
+  mananger                  varchar(255),
+  product                   integer,
   gas_cost                  integer,
   scan_document_url         varchar(255),
+  comments                  varchar(255),
   constraint pk_point primary key (id))
 ;
 

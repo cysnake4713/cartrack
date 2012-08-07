@@ -41,7 +41,7 @@ public class Target extends Model {
 	@ManyToOne
 	public Account account;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	public List<Point> points;
 
 	public static Finder<Long, Target> find = new Finder<Long, Target>(

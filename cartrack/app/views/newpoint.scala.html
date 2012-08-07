@@ -1,36 +1,25 @@
 @(message:String="", tagString:String="") 
-@main("new point"){
-<div class="container">
-	<div class="row">
-		<div class="span6 offset3">
-			<br /> <br /> <br /> <br /> <br />
-			<div>
-				<form action="/point/newpoint" method="POST" class="well">
-					<legend>创建一个新记录</legend>
-					@if(!"".equals(message)){
-						<div class="alert alert-error">@message</div>
-					}
-					<label>对象标示</label> <input autocomplete="off"  name="target.targetTag" type="text"
-						class="inline" data-provide="typeahead" data-source="@tagString" data-items="4"/>
-					<p class="help-block">输入对象标示</p>
-					<label>时间</label> <input name="pointRecordTime" id="recordtime"
-						type="text" />
-					<p class="help-block">输入时间格式为:yyyy-MM-dd hh:mm</p>
-					<label>经纬度</label>经度 <input name="longitude" type="text"
-						class="input-small" />纬度<input name="latitude" type="text"
-						class="input-small" /> 
-					<label>油耗</label><input name="gasCost" type="text" />升
-					<label>相关文件</label><input name="scanDocumentUrl" type="text" />
-					<label>备注</label>
-					<textarea name="comments" class="input-medium" rows="3"></textarea>
-					<br />
-					<button type="submit" class="btn btn-primary">创建</button>
-					<button class="btn">清除</button>
-				</form>
-			</div>
-		</div>
-	</div>
+<div>
+	<form action="/point/newpoint" method="POST" class="well">
+		<legend>创建一个新记录</legend>
+		@if(!"".equals(message)){
+		<div class="alert alert-error">@message</div>
+		} <label>对象标示</label> <input autocomplete="off"
+			name="target.targetTag" type="text" class="inline"
+			data-provide="typeahead" data-source="@tagString" data-items="4" />
+		<p class="help-block">输入对象标示</p>
+		<label>时间</label> <input name="pointRecordTime" id="recordtime"
+			type="text" />
+		<p class="help-block">输入时间格式为:yyyy-MM-dd hh:mm</p>
+		<label>经纬度</label>经度 <input name="longitude" type="text"
+			class="input-small" />纬度<input name="latitude" type="text"
+			class="input-small" /> <label>油耗</label><input name="gasCost"
+			type="text" />升 <label>相关文件</label><input name="scanDocumentUrl"
+			type="text" /> <label>备注</label>
+		<textarea name="comments" class="input-medium" rows="3"></textarea>
+		<br />
+		<button type="submit" class="btn btn-primary">创建</button>
+		<button class="btn">清除</button>
+	</form>
 </div>
 
-
-}

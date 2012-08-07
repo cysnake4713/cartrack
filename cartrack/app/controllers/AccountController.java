@@ -47,9 +47,7 @@ public class AccountController extends Controller {
 				// login and set cookie
 				session("userName", account.accountName);
 				session("userId", account.id.toString());
-				return ok(newtarget
-						.render(Account.find.byId(Long
-								.valueOf(session("userId"))).targets, ""));
+				return ok(map.render(Account.find.byId(Long.valueOf(session("userId"))).targets));
 			} else {
 				// else return password or account name error message
 				return badRequest(login.render(Messages

@@ -15,6 +15,7 @@ POST	/user/login					controllers.AccountController.login()
 POST	/target/newtarget			controllers.TargetController.newTarget()
 POST	/point/newpoint				controllers.PointController.newPoint()
 GET		/user/logout				controllers.AccountController.logout()
+GET		/point/getpoints/:id		controllers.PointController.getPointsByTarget(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

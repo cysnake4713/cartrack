@@ -1,6 +1,5 @@
 package models;
 
-
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -27,19 +26,23 @@ public class Point extends Model {
 
 	@ManyToOne
 	public Target target;
-	
-	@Formats.DateTime(pattern ="yyyy-MM-dd hh:mm")
+
+	@Formats.DateTime(pattern = "yyyy-MM-dd hh:mm")
 	public Date pointRecordTime;
 
 	public Double longitude;// 经度
 
 	public Double latitude;// 纬度
-	
-	public String comments;
-	
+
+	public String mananger;// 负责人
+
+	public int product;
+
 	public int gasCost;
-	
+
 	public String scanDocumentUrl;
+
+	public String comments;
 
 	public static Finder<Long, Point> find = new Finder<Long, Point>(
 			Long.class, Point.class);

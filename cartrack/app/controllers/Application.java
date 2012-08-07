@@ -17,8 +17,7 @@ public class Application extends Controller {
 	}
 
 	public static Result newTarget() {
-		return ok(newtarget.render(
-				Account.find.byId(Long.valueOf(session("userId"))).targets, ""));
+		return ok(newtarget.render(""));
 	}
 
 	public static Result newPoint() {
