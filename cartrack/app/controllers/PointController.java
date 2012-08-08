@@ -58,7 +58,9 @@ public class PointController extends Controller {
 	}
 
 	public static Result deletePoint(Long id) {
-		Point.find.byId(id).delete();
+		Point point = Point.find.byId(id);
+		point.target = null;
+		point.delete();
 		return ok();
 	}
 
