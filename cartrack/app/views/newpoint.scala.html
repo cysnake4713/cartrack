@@ -1,25 +1,60 @@
-@(message:String="", tagString:String="") 
+@(message:String="",target:Target) 
+@content = {
 <div>
 	<form action="/point/newpoint" method="POST" class="well">
 		<legend>创建一个新记录</legend>
 		@if(!"".equals(message)){
 		<div class="alert alert-error">@message</div>
-		} <label>对象标示</label> <input autocomplete="off"
-			name="target.targetTag" type="text" class="inline"
-			data-provide="typeahead" data-source="@tagString" data-items="4" />
-		<p class="help-block">输入对象标示</p>
-		<label>时间</label> <input name="pointRecordTime" id="recordtime"
-			type="text" />
-		<p class="help-block">输入时间格式为:yyyy-MM-dd hh:mm</p>
-		<label>经纬度</label>经度 <input name="longitude" type="text"
-			class="input-small" />纬度<input name="latitude" type="text"
-			class="input-small" /> <label>油耗</label><input name="gasCost"
-			type="text" />升 <label>相关文件</label><input name="scanDocumentUrl"
-			type="text" /> <label>备注</label>
-		<textarea name="comments" class="input-medium" rows="3"></textarea>
+		} <input type="hidden" name="target.id" value="@target.id" />
+		<div class="form-inline">
+			<label class="control-label">路径名称:</label> <input
+				name="target.targetName" type="text" value="@target.targetName"
+				class="input-small" disabled="disabled"/> 
+			<label>产品标示:</label> <input
+				name="target.targetTag" value="@target.targetTag" type="text"
+				class="input-small" disabled="disabled"/>
+		</div>
 		<br />
-		<button type="submit" class="btn btn-primary">创建</button>
-		<button class="btn">清除</button>
+		<div class="form-inline">
+			<label>时间</label> <input name="pointRecordTime" id="recordtime"
+				type="text" />
+			<p class="help-block">输入时间格式为:yyyy-MM-dd hh:mm</p>
+		</div>
+		<br />
+		<div class="form-inline">
+			<label>经度:</label><input name="longitude" type="text"
+				class="input-small" /> <label>纬度:</label><input name="latitude"
+				type="text" class="input-small" />
+		</div>
+		<br />
+		<div class="form-inline">
+			<label>油耗:</label>
+			<div class="input-append">
+				<input class="input-small" name="gasCost" type="text" /><span
+					class="add-on">升</span>
+			</div>
+		</div>
+		<br />
+		<div class="form-inline">
+			<label>负责人:</label><input name="mananger" type="text"
+				class="input-small" /> <label>产品:</label><input name="product"
+				type="text" class="input-small" />
+		</div>
+		<br />
+		<div class="form-inline">
+			<label>相关文件:</label><input name="scanDocumentUrl" type="text" />
+		</div>
+		<br />
+		<div class="form-inline">
+			<label>信息:</label>
+			<textarea name="comments" class="input-medium" rows="3"></textarea>
+		</div>
+		<br />
+		<div>
+			<button type="submit" class="btn btn-primary">创建</button>
+			<button class="btn">清除</button>
+		</div>
 	</form>
 </div>
 
+} @main("newpoint")(content)

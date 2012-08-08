@@ -6,49 +6,49 @@
 		@if(!"".equals(message)){
 		<div class="alert alert-error">@message</div>
 		} 
-		<input type="hidden" value="@point.id"/>
+		<input type="hidden" name="id" value="@point.field("id").value()"/>
 		<div class="form-inline">
 			<label class="control-label">路径名称:</label> <input
-				name="target.targetName" type="text" value="@point.target.targetName"
-				class="input-small" disabled="disabled"/> 
+				name="target.targetName" type="text" 
+				class="input-small" value="@point.field("target.targetName").value()" disabled="disabled"/> 
 			<label>产品标示:</label> <input
-				name="target.targetTag" value="@point.target.targetTag" type="text"
-				class="input-small" disabled="disabled"/>
+				name="target.targetTag" type="text"
+				class="input-small" value="@point.field("target.targetTag").value()" disabled="disabled"/>
 		</div>
 		<br />
 		<div class="form-inline">
-			<label>时间</label> <input name="pointRecordTime" value="@point.pointRecordTime" id="recordtime"
+			<label>时间</label> <input name="pointRecordTime" value="@point.field("pointRecordTime").value()" id="recordtime"
 				type="text" />
 			<p class="help-block">输入时间格式为:yyyy-MM-dd hh:mm</p>
 		</div>
 		<br />
 		<div class="form-inline">
-			<label>经度:</label><input name="longitude" value="@point.longitude" type="text"
-				class="input-small" /> <label>纬度:</label><input name="latitude"
-				type="text" value="@point.latitude" class="input-small" />
+			<label>经度:</label><input name="longitude" type="text"
+				class="input-small" value="@point.field("longitude").value()"/> <label>纬度:</label><input name="latitude"
+				type="text" class="input-small"  value="@point.field("latitude").value()"/>
 		</div>
 		<br />
 		<div class="form-inline">
 			<label>油耗:</label>
 			<div class="input-append">
-				<input class="input-small" name="gasCost" value="@point.gasCost" type="text" /><span
+				<input class="input-small" name="gasCost" type="text" value="@point.field("gasCost").value()" /><span
 					class="add-on">升</span>
 			</div>
 		</div>
 		<br />
 		<div class="form-inline">
 			<label>负责人:</label><input name="mananger" type="text"
-				class="input-small" /> <label>产品:</label><input name="product"
-				type="text" value="@point.product" class="input-small" />
+				class="input-small" value="@point.field("mananger").value()"/> <label>产品:</label><input name="product"
+				type="text" value="@point.field("product").value()"  class="input-small" />
 		</div>
 		<br />
 		<div class="form-inline">
-			<label>相关文件:</label><input name="scanDocumentUrl" value="@point.scanDocumentUrl" type="text" />
+			<label>相关文件:</label><input name="scanDocumentUrl" value="@point.field("scanDocumentUrl").value()" type="text" />
 		</div>
 		<br />
 		<div class="form-inline">
 			<label>信息:</label>
-			<textarea name="comments" value="@point.comments" class="input-medium" rows="3"></textarea>
+			<textarea name="comments" value="@point.field("comments").value()"  class="input-medium" rows="3"></textarea>
 		</div>
 		<br />
 		<div>

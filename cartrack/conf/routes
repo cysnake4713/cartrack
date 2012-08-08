@@ -7,7 +7,8 @@ GET		/							controllers.Application.login()
 GET		/register					controllers.Application.register()
 GET		/login						controllers.Application.login()
 GET		/newtarget					controllers.Application.newTarget()
-GET		/newpoint					controllers.Application.newPoint()
+GET		/newpoint/:id				controllers.Application.newPoint(id: Long)
+GET		/updatepoint/:id			controllers.Application.updatePoint(id: Long)
 
 #register
 POST	/user/register				controllers.AccountController.register()
@@ -16,6 +17,9 @@ POST	/target/newtarget			controllers.TargetController.newTarget()
 POST	/point/newpoint				controllers.PointController.newPoint()
 GET		/user/logout				controllers.AccountController.logout()
 GET		/point/getpoints/:id		controllers.PointController.getPointsByTarget(id: Long)
+GET		/target/getinfo/:id			controllers.TargetController.getTargetInfo(id: Long)
+GET		/point/deletepoint/:id		controllers.PointController.deletePoint(id: Long)
+POST	/point/updatepoint			controllers.PointController.updatePoint()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

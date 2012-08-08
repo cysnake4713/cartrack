@@ -1,4 +1,4 @@
-@(message: String="") 
+@(message: String="",tagString:String="") 
 @content = {
 <div class="container-fluid">
 	<div class="row-fluid">
@@ -11,7 +11,9 @@
 			<div class="form-inline">
 				<label class="control-label">路径名称:</label> <input
 					name="target.targetName" type="text" class="input-small" /> <label>产品标示:</label>
-				<input name="target.targetTag" type="text" class="input-small" />
+				<input name="target.targetTag" type="text" class="input-small"
+					autocomplete="off" data-provide="typeahead"
+					data-source="@tagString" data-items="4" />
 			</div>
 			<br />
 			<div class="form-inline">
@@ -55,6 +57,7 @@
 				<label>信息:</label>
 				<textarea name="comments" class="input-medium" rows="3"></textarea>
 			</div>
+			<br/>
 			<div>
 				<button type="submit" class="btn btn-primary">创建</button>
 			</div>

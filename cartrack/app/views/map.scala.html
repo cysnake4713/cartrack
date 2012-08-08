@@ -27,10 +27,10 @@
       				}
       				var lastLoc = locationArray.pop();
       				if(lastLoc){
-      					addMarker(obj,json.target.targetName,lastLoc,startLocation);
+      					addMarker(obj,json.target.id,json.target.targetName,lastLoc,startLocation);
       					locationArray.push(lastLoc);
       				}else{
-      					addMarker(obj,json.target.targetName,null,startLocation);
+      					addMarker(obj,json.target.id,json.target.targetName,null,startLocation);
       				}
       				tempLocation = getlocationFromJson(obj);
       				locationArray.push(tempLocation);
@@ -44,22 +44,21 @@
       		});
       		e.preventDefault();
       	});
+      	
       }
       
       function getTargetPoint(){
       
       }
       
-	$(document).ready(
-		function(){
-			initGoogleMap();
-				$(window).resize(function() {
-		var h = $(window).height(), offsetTop = 0; // Calculate the top offset
-		$('#map_canvas').css('height', (h - offsetTop));
-	}).resize();
-			init();
-		}
-	)
+	$(document).ready(function(){
+		initGoogleMap();
+		$(window).resize(function() {
+			var h = $(window).height(), offsetTop = 0; // Calculate the top offset
+			$('#map_canvas').css('height', (h - offsetTop));
+		}).resize();
+		init();
+	})
 	
 	
 

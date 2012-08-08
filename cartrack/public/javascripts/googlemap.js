@@ -29,7 +29,7 @@ function getlocationFromJson(json) {
 	return latlng;
 }
 
-function addMarker(obj, name, formerLocation, startLocation) {
+function addMarker(obj,targetId, name, formerLocation, startLocation) {
 
 	var location = getlocationFromJson(obj);
 	var marker = new google.maps.Marker({
@@ -51,13 +51,13 @@ function addMarker(obj, name, formerLocation, startLocation) {
 	}
 
 	var contentString = '<div class="container-fluid">'
-			+ '<div class="row-fluid"><div class="span8">{0}</div><div class="span4"><a href="/info{1}">信息</a></div></div>'
+			+ '<div class="row-fluid"><div class="span8">{0}</div><div class="span4"><a id="gettargetinfo" onclick="window.open(\'/target/getinfo/{1}\');" href="#">信息</a></div></div>'
 			+ '<div class="row-fluid"><div class="span12">{2}</div></div>'
 			+ '<div class="row-fluid"><div class="span4"></div><div class="span4">负责人:{3}</div></div>'
 			+ '<div class="row-fluid"><div class="span4"></div><div class="span4">产品:{4}</div></div>'
 			+ '<div class="row-fluid"><div class="span6">距离前点:{5}km</div><div class="span6">距离起点:{6}km</div></div>'
 			+ '</div>';
-	contentString = jQuery.validator.format(contentString, name, obj.id,
+	contentString = jQuery.validator.format(contentString, name, targetId,
 			new Date(obj.pointRecordTime).toLocaleString(), obj.mananger,
 			obj.product, distanceToLast, distanceToStart);
 

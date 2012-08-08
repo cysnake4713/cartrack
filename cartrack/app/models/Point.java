@@ -2,7 +2,9 @@ package models;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,7 +26,7 @@ public class Point extends Model {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "point_seq")
 	public Long id;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	public Target target;
 
 	@Formats.DateTime(pattern = "yyyy-MM-dd hh:mm")
