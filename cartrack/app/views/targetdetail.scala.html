@@ -1,0 +1,130 @@
+@(message:String = "" , target:Target) 
+@import java.util.Date
+@targetExist = {
+<div class="container">
+	<div class="row">
+		<div class="page-header">
+			<h1>标点详细信息</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span4">
+			<table class="table table-condensed">
+				<tbody>
+					<tr>
+						<td>目标标示:</td>
+						<td>@target.targetTag</td>
+					</tr>
+					<tr>
+						<td>目标名称:</td>
+						<td>@target.targetName</td>
+					</tr>
+					<tr>
+						<td>目标备注:</td>
+						<td>@target.comments</td>
+					</tr>
+				</tbody>
+			</table>
+			
+		</div>
+		
+	</div>
+	<div class="row">
+		<div class="page-header">
+			<h2>相关点记录</h2>
+		</div>
+		<table class="table table-condensed table-striped">
+			<thead>
+				<tr>
+					<th>时间</th>
+					<th>经度</th>
+					<th>纬度</th>
+					<th>负责人</th>
+					<th>产品</th>
+					<th>油耗</th>
+					<th>备注</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+			@if(target.points!=null){
+				@for(pointTemp <- target.points){
+					<tr>
+						
+						@if(pointTemp.pointRecordTime!=null){
+							<td>@pointTemp.pointRecordTime.toLocaleString()</td>
+						}else{
+							<td></td>
+						}
+						
+						<td>@pointTemp.longitude</td>
+						<td>@pointTemp.latitude</td>
+						<td>@pointTemp.mananger</td>
+						<td>@pointTemp.product g</td>
+						<td>@pointTemp.gasCost 升</td>
+						<td>@pointTemp.comments</td>
+						<td><a id="updatepoint" href="@routes.Application.updatePoint(pointTemp.id)">修改</a>&nbsp;<a id="deletepoint" href="@routes.PointController.deletePoint(pointTemp.id)">删除</a></td>
+					</tr>
+				}
+			}else{
+				<strong>没有记录!</strong>
+			}
+			
+			</tbody>
+		</table>
+	</div>
+	<div class="row">
+		<button id="newpoint" class="btn btn-primary">添加新标点</button>
+	</div>
+</div>
+
+} 
+
+@targetNoExist = {
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="page-header">
+			<h1>标点详细信息</h1>
+		</div>
+	</div>
+	<div class="row-fluid">
+		@message
+	</div>
+</div>
+}
+
+@js = {
+	function reload(){
+		location.reload(true); 
+	}
+
+	$(document).ready(function(){
+			$("button#newpoint").click(function(e){
+				window.showModalDialog('@routes.Application.newPoint(target.id)',window, 'dialogWidth:430px;dialogHeight:580px;resizable:no;status:no;scroll:no');
+			
+			});
+			
+			$("a#deletepoint").click(function(e){
+				$.getJSON(e.target.href, function(data){
+					 reload();
+				});
+				e.preventDefault();
+			});
+			$("a#updatepoint").click(function(e){
+				window.showModalDialog(e.target.href,window, 'dialogWidth:430px;dialogHeight:580px;resizable:no;status:no;scroll:no');
+				e.preventDefault();
+			});
+			
+	});
+}
+@css = {
+
+}
+
+@main("newtarget",css,js){
+	@if(target!=null){
+		@targetExist
+	}else{
+		@targetNoExist
+	}
+}
