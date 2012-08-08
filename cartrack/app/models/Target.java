@@ -29,7 +29,7 @@ public class Target extends Model {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "target_seq")
 	public Long id;
 
-	@Column(unique = true)
+//	@Column(unique = true)
 	@Required
 	public String targetTag;
 
@@ -48,12 +48,13 @@ public class Target extends Model {
 			Long.class, Target.class);
 
 	public boolean isExist() {
-		Target target = find.where().eq("targetTag", targetTag).findUnique();
+		Target target = find.where().eq("targetTag", targetTag)
+				.eq("account", account).findUnique();
 		return (target == null ? false : true);
 	}
 
 	public Target findByTargetTag() {
-		return find.where().eq("targetTag", targetTag).findUnique();
+		return find.where().eq("targetTag", targetTag).eq("account", account).findUnique();
 	}
 
 }

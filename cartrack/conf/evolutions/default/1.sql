@@ -31,7 +31,6 @@ create table target (
   target_name               varchar(255),
   comments                  varchar(255),
   account_id                bigint,
-  constraint uq_target_target_tag unique (target_tag),
   constraint pk_target primary key (id))
 ;
 
